@@ -1,1 +1,18 @@
-@import "tailwindcss";
+/* Font; */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* Tailwind CSS */
+@import 'tailwindcss';
+
+@theme {
+  --color-background: oklch(0.2805 0.034 262.78);
+  --color-text: oklch(0.7955 0.0179 256.3);
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+}
