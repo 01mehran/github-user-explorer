@@ -5,24 +5,75 @@ import nesting from './assets/Nesting.svg';
 import star from './assets/Star.svg';
 import chield from './assets/Chield_alt.svg';
 
+// Hooks
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
+interface TData {
+  avatar_url: string;
+  followers: number;
+  following: number;
+  location: string | null;
+}
+
 export default function Home() {
+  const [input, setInput] = useState('');
+  const [data, setData] = useState<TData | null>(null);
+
+  useEffect(() => {
+    getUser('01mehran');
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await getUser();
+
+    setInput('');
+  };
+
+  const getUser = async (usename?: string) => {
+    const user = usename ?? input;
+
+    try {
+      const res = await axios<TData>(`https://api.github.com/users/${user}`);
+      setData(res.data);
+      console.log(data);
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(err.message);
+      } else {
+        console.log(String(err));
+      }
+    }
+  };
+
   return (
     <div className="relative min-h-screen antialiased">
       {/* Hero section*/}
       <header className="h-48 w-full bg-black bg-[url(./assets/mobile-hero-img.jpg)] bg-cover bg-center bg-no-repeat px-4 py-3 sm:h-54 sm:bg-[url(./assets/desktop-hero-img.jpg)]">
         {/* Search input */}
-        <article className="relative mx-auto h-12 w-full rounded-lg sm:max-w-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="relative mx-auto h-12 w-full rounded-lg sm:max-w-lg"
+        >
           <input
             type="text"
             placeholder="Enter a github username"
             className="bg-background mx-auto h-full w-full rounded-lg border-0 px-12 text-white outline-0"
+            value={input}
+            onChange={handleChange}
           />
           <img
             src={searchIcon}
             alt="search icon"
             className="absolute top-1/2 left-4 -translate-y-1/2 transform"
           />
-        </article>
+        </form>
       </header>
 
       {/* Main content */}
@@ -32,7 +83,7 @@ export default function Home() {
           {/* Github icon */}
           <article className="border-background h-22 w-22 -translate-y-8 transform rounded-xl border-6 md:h-24 md:w-24">
             <img
-              src={githubImg}
+              src={data?.avatar_url || githubImg}
               alt="github img"
               className="h-full w-full rounded-xl object-cover"
             />
@@ -42,17 +93,19 @@ export default function Home() {
           <div className="-translate-y-7 transform flex-wrap items-start space-y-3 sm:mt-2 sm:flex sm:translate-y-0 sm:space-x-4 md:mt-3 md:space-x-8">
             <div className="box">
               <span className="box-child">Followers</span>
-              <span className="pl-3 text-center">123456</span>
+              <span className="pl-3 text-center">{data?.followers || 0}</span>
             </div>
             {/* Following */}
             <div className="box">
               <span className="box-child">Following</span>
-              <span className="pl-3 text-center">0</span>
+              <span className="pl-3 text-center">{data?.following || 0}</span>
             </div>
             {/* Location */}
             <div className="box">
               <span className="box-child">Location</span>
-              <span className="pl-3 text-center">Iran</span>
+              <span className="pl-3 text-center">
+                {data?.location || 'Iran'}
+              </span>
             </div>
           </div>
         </section>
