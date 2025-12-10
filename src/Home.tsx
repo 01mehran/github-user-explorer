@@ -90,8 +90,8 @@ export default function Home() {
         </section>
 
         <section className="mx-auto px-4 sm:max-w-5xl">
-          <h3 className="text-4xl font-medium">Github</h3>
-          <p>How people build sofware.</p>
+          <h3 className="text-4xl font-medium">{data?.login}</h3>
+          <p>{data?.bio || 'No bio set'}</p>
 
           {/* Repositories */}
           <div className="mt-6 grid items-start space-y-6 sm:gap-4 sm:space-y-2 md:grid-cols-2">

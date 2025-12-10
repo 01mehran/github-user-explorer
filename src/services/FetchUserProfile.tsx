@@ -6,6 +6,8 @@ interface TData {
   followers: number;
   following: number;
   location: string | null;
+  bio?: string;
+  login: string;
 }
 
 export default function FetchUserProfile(input: string) {
