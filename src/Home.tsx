@@ -1,6 +1,9 @@
 // icons;
 import searchIcon from './assets/Search.svg';
 import githubImg from './assets/githubimg.png';
+import nesting from './assets/Nesting.svg';
+import star from './assets/Star.svg';
+import chield from './assets/Chield_alt.svg';
 
 export default function Home() {
   return (
@@ -22,7 +25,8 @@ export default function Home() {
         </article>
       </header>
 
-      <main>
+      {/* Main content */}
+      <main className="pb-4">
         {/* Followers & location section  */}
         <section className="items-start space-y-4 px-4 sm:flex sm:max-w-5xl sm:gap-6 md:mx-auto md:gap-12">
           {/* Github icon */}
@@ -35,7 +39,7 @@ export default function Home() {
           </article>
 
           {/* Followers  */}
-          <div className="-translate-y-7 transform flex-wrap items-start space-y-3 sm:mt-2 sm:flex sm:translate-y-0 sm:space-x-4 md:mt-4 md:space-x-8">
+          <div className="-translate-y-7 transform flex-wrap items-start space-y-3 sm:mt-2 sm:flex sm:translate-y-0 sm:space-x-4 md:mt-3 md:space-x-8">
             <div className="box">
               <span className="box-child">Followers</span>
               <span className="pl-3 text-center">123456</span>
@@ -52,7 +56,51 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <section className="mx-auto px-4 sm:max-w-5xl">
+          <h3 className="text-4xl font-medium">Github</h3>
+          <p>How people build sofware.</p>
+
+          {/* Repositories */}
+          <div className="mt-6 grid items-start space-y-6 sm:gap-4 sm:space-y-2 md:grid-cols-2">
+            <div className="flex h-36 flex-col justify-between rounded-lg bg-linear-to-br from-[#13182e] via-[#17183a] to-[#1b1a44] p-4">
+              <div className="flex flex-col gap-px">
+                <p>repo name .github</p>
+                <p>description</p>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2 md:gap-6">
+                  <article className="flex gap-1 text-sm">
+                    <img src={nesting} alt="nesting icon" className="w-5" />
+                    <span>2,300</span>
+                  </article>
+                  <article className="flex gap-1 text-sm">
+                    <img src={star} alt="nesting icon" className="w-5" />
+                    <span>72</span>
+                  </article>
+                  <article className="flex gap-1 text-sm">
+                    <img src={chield} alt="nesting icon" className="w-5" />
+                    <span>MIT</span>
+                  </article>
+                  <article>
+                    <p className="text-[14px] text-nowrap">
+                      updated X days ago{' '}
+                    </p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer className="mt-6 text-center md:mt-8">
+        <button className="cursor-pointer font-medium">
+          View all repositories
+        </button>
+      </footer>
     </div>
   );
 }
