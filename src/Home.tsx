@@ -7,18 +7,13 @@ import chield from './assets/Chield_alt.svg';
 
 // Hooks
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
-interface TData {
-  avatar_url: string;
-  followers: number;
-  following: number;
-  location: string | null;
-}
+// Services;
+import FetchUserProfile from './services/FetchUserProfile';
 
 export default function Home() {
   const [input, setInput] = useState('');
-  const [data, setData] = useState<TData | null>(null);
+  const { data, getUser } = FetchUserProfile(input);
 
   useEffect(() => {
     getUser('01mehran');
@@ -34,22 +29,6 @@ export default function Home() {
     await getUser();
 
     setInput('');
-  };
-
-  const getUser = async (usename?: string) => {
-    const user = usename ?? input;
-
-    try {
-      const res = await axios<TData>(`https://api.github.com/users/${user}`);
-      setData(res.data);
-      console.log(data);
-    } catch (err) {
-      if (err instanceof Error) {
-        console.log(err.message);
-      } else {
-        console.log(String(err));
-      }
-    }
   };
 
   return (
