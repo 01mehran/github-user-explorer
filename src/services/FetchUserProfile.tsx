@@ -10,8 +10,21 @@ interface TData {
   login: string;
 }
 
+export interface TRepo {
+  id: number;
+  name: string;
+  description: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  license: {
+    spdx_id: string | null;
+  } | null;
+  updated_at: string;
+}
+
 export default function FetchUserProfile(input: string) {
   const [data, setData] = useState<TData | null>(null);
+  const [userRepos, setUserRepos] = useState<TRepo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const getUser = async (usename?: string) => {
@@ -21,7 +34,11 @@ export default function FetchUserProfile(input: string) {
     try {
       const res = await axios<TData>(`https://api.github.com/users/${user}`);
       setData(res.data);
-      console.log(data);
+
+      const resRepos = await axios<TRepo[]>(
+        `https://api.github.com/users/${user}/repos`,
+      );
+      setUserRepos(resRepos.data);
     } catch (err) {
       if (err instanceof Error) {
         console.log(err.message);
@@ -33,5 +50,5 @@ export default function FetchUserProfile(input: string) {
     }
   };
 
-  return { data, getUser, isLoading };
+  return { data, getUser, isLoading, userRepos };
 }

@@ -1,9 +1,6 @@
 // icons;
 import searchIcon from './assets/Search.svg';
 import githubImg from './assets/githubimg.png';
-import nesting from './assets/Nesting.svg';
-import star from './assets/Star.svg';
-import chield from './assets/Chield_alt.svg';
 
 // Hooks
 import { useEffect, useState } from 'react';
@@ -11,10 +8,11 @@ import { useEffect, useState } from 'react';
 // Services;
 import FetchUserProfile from './services/FetchUserProfile';
 import Spinner from './Spinner';
+import Repositories from './Repositories';
 
 export default function Home() {
   const [input, setInput] = useState('');
-  const { data, getUser, isLoading } = FetchUserProfile(input);
+  const { data, getUser, isLoading, userRepos } = FetchUserProfile(input);
 
   useEffect(() => {
     getUser('01mehran');
@@ -95,36 +93,11 @@ export default function Home() {
           <h3 className="text-4xl font-medium">{data?.login}</h3>
           <p>{data?.bio || 'No bio set'}</p>
 
-          {/* Repositories */}
           <div className="mt-6 grid items-start space-y-6 sm:gap-4 sm:space-y-2 md:grid-cols-2">
-            <div className="flex h-36 flex-col justify-between rounded-lg bg-linear-to-br from-[#13182e] via-[#17183a] to-[#1b1a44] p-4">
-              <div className="flex flex-col gap-px">
-                <p>repo name .github</p>
-                <p>description</p>
-              </div>
-
-              <div>
-                <div className="flex items-center gap-2 md:gap-6">
-                  <article className="flex gap-1 text-sm">
-                    <img src={nesting} alt="nesting icon" className="w-5" />
-                    <span>2,300</span>
-                  </article>
-                  <article className="flex gap-1 text-sm">
-                    <img src={star} alt="nesting icon" className="w-5" />
-                    <span>72</span>
-                  </article>
-                  <article className="flex gap-1 text-sm">
-                    <img src={chield} alt="nesting icon" className="w-5" />
-                    <span>MIT</span>
-                  </article>
-                  <article>
-                    <p className="text-[14px] text-nowrap">
-                      updated X days ago{' '}
-                    </p>
-                  </article>
-                </div>
-              </div>
-            </div>
+            {/* Repositories */}
+            {userRepos?.map((repo) => (
+              <Repositories key={repo.id} repo={repo} />
+            ))}
           </div>
         </section>
       </main>
