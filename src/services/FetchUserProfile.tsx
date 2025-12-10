@@ -12,10 +12,12 @@ interface TData {
 
 export default function FetchUserProfile(input: string) {
   const [data, setData] = useState<TData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getUser = async (usename?: string) => {
     const user = usename ?? input;
 
+    setIsLoading(true);
     try {
       const res = await axios<TData>(`https://api.github.com/users/${user}`);
       setData(res.data);
@@ -26,8 +28,10 @@ export default function FetchUserProfile(input: string) {
       } else {
         console.log(String(err));
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return { data, getUser };
+  return { data, getUser, isLoading };
 }

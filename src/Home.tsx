@@ -10,10 +10,11 @@ import { useEffect, useState } from 'react';
 
 // Services;
 import FetchUserProfile from './services/FetchUserProfile';
+import Spinner from './Spinner';
 
 export default function Home() {
   const [input, setInput] = useState('');
-  const { data, getUser } = FetchUserProfile(input);
+  const { data, getUser, isLoading } = FetchUserProfile(input);
 
   useEffect(() => {
     getUser('01mehran');
@@ -52,6 +53,7 @@ export default function Home() {
             alt="search icon"
             className="absolute top-1/2 left-4 -translate-y-1/2 transform"
           />
+          {isLoading && <Spinner />}
         </form>
       </header>
 
