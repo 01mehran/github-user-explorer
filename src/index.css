@@ -26,3 +26,7 @@
     @apply border-text/30 border-r-[1.5px] pr-3 text-center;
   }
 }
+
+::-webkit-scrollbar {
+  width: 0px;
+}
