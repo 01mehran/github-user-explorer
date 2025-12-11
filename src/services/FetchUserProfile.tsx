@@ -22,33 +22,56 @@ export interface TRepo {
   updated_at: string;
 }
 
-export default function FetchUserProfile(input: string) {
+export default function FetchUserProfile(initialUser: string) {
   const [data, setData] = useState<TData | null>(null);
   const [userRepos, setUserRepos] = useState<TRepo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const getUser = async (usename?: string) => {
-    const user = usename ?? input;
+    const user = usename ?? initialUser;
 
     setIsLoading(true);
-    try {
-      const res = await axios<TData>(`https://api.github.com/users/${user}`);
-      setData(res.data);
+    setError(null);
 
+    try {
+      // Fetch user;
+      const resUser = await axios<TData>(
+        `https://api.github.com/users/${user}`,
+      );
+
+      if (resUser.status !== 200) {
+        throw new Error('User not found');
+      }
+
+      setData(resUser.data);
+
+      // Fetch repos;
       const resRepos = await axios<TRepo[]>(
         `https://api.github.com/users/${user}/repos`,
       );
+
+      if (resRepos.status !== 200) {
+        throw new Error('Repositories not found');
+      }
+
       setUserRepos(resRepos.data);
     } catch (err) {
-      if (err instanceof Error) {
-        console.log(err.message);
+      if (axios.isAxiosError(err)) {
+        if (err.response?.status === 404) {
+          setError('User not found');
+        } else {
+          setError(err.message || 'Something went wrong!');
+        }
+      } else if (err instanceof Error) {
+        setError(err.message);
       } else {
-        console.log(String(err));
+        setError('Unknown error occured');
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { data, getUser, isLoading, userRepos };
+  return { data, getUser, isLoading, userRepos, error };
 }
