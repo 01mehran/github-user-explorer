@@ -1,5 +1,4 @@
 // icons;
-import searchIcon from './assets/Search.svg';
 import githubImg from './assets/githubimg.png';
 
 // Hooks
@@ -7,8 +6,8 @@ import { useEffect, useState } from 'react';
 
 // Services;
 import FetchUserProfile from './services/FetchUserProfile';
-import Spinner from './Spinner';
 import Repositories from './Repositories';
+import HeroSection from './HeroSection';
 
 export default function Home() {
   const [input, setInput] = useState('');
@@ -34,27 +33,12 @@ export default function Home() {
   return (
     <div className="relative min-h-screen antialiased">
       {/* Hero section*/}
-      <header className="h-48 w-full bg-black bg-[url(./assets/mobile-hero-img.jpg)] bg-cover bg-center bg-no-repeat px-4 py-3 sm:h-54 sm:bg-[url(./assets/desktop-hero-img.jpg)]">
-        {/* Search input */}
-        <form
-          onSubmit={handleSubmit}
-          className="relative mx-auto h-12 w-full rounded-lg sm:max-w-lg"
-        >
-          <input
-            type="text"
-            placeholder="Enter a github username"
-            className="bg-background mx-auto h-full w-full rounded-lg border-0 px-12 text-white outline-0"
-            value={input}
-            onChange={handleChange}
-          />
-          <img
-            src={searchIcon}
-            alt="search icon"
-            className="absolute top-1/2 left-4 -translate-y-1/2 transform"
-          />
-          {isLoading && <Spinner />}
-        </form>
-      </header>
+      <HeroSection
+        onHandleChange={handleChange}
+        onHandleSubmit={handleSubmit}
+        input={input}
+        isLoading={isLoading}
+      />
 
       {error ? (
         <p className="m-4 text-red-600 md:m-12 md:text-xl xl:mx-32">{error}</p>
