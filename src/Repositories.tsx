@@ -35,7 +35,7 @@ export default function Repositories({ repo }: TRepoProps) {
           </article>
           <article className="flex gap-1 text-sm">
             <img src={chield} alt="nesting icon" className="w-5" />
-            <span>MIT</span>
+            <span>{repo.license?.spdx_id || 'MIT'}</span>
           </article>
           <article>
             <p className="text-[14px] text-nowrap">updated X days ago</p>

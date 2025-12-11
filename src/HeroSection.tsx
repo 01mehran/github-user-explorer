@@ -1,11 +1,5 @@
-// Services;
-import FetchUserProfile from './services/FetchUserProfile';
-
 // Icons;
 import searchIcon from './assets/Search.svg';
-
-// Components;
-import Spinner from './Spinner';
 
 interface THeroSectionProps {
   onHandleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -19,8 +13,6 @@ export default function HeroSection({
   input,
   onHandleChange,
 }: THeroSectionProps) {
-  const { isLoading } = FetchUserProfile(input);
-
   return (
     <header className="h-48 w-full bg-black bg-[url(./assets/mobile-hero-img.jpg)] bg-cover bg-center bg-no-repeat px-4 py-3 sm:h-54 sm:bg-[url(./assets/desktop-hero-img.jpg)]">
       {/* Search input */}
@@ -40,7 +32,6 @@ export default function HeroSection({
           alt="search icon"
           className="absolute top-1/2 left-4 -translate-y-1/2 transform"
         />
-        {isLoading && <Spinner />}
       </form>
     </header>
   );

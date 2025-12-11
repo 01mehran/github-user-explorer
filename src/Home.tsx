@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import FetchUserProfile from './services/FetchUserProfile';
 import Repositories from './Repositories';
 import HeroSection from './HeroSection';
+import Spinner from './Spinner';
 
 export default function Home() {
   const [input, setInput] = useState('');
@@ -40,7 +41,9 @@ export default function Home() {
         isLoading={isLoading}
       />
 
-      {error ? (
+      {isLoading ? (
+        <Spinner />
+      ) : error ? (
         <p className="m-4 text-red-600 md:m-12 md:text-xl xl:mx-32">{error}</p>
       ) : (
         <>
