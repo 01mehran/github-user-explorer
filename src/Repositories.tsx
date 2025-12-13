@@ -8,6 +8,35 @@ interface TRepoProps {
 }
 
 export default function Repositories({ repo }: TRepoProps) {
+  const now = Date.now();
+  const createdAt = new Date(repo.updated_at).getTime();
+
+  const diffTime = now - createdAt;
+
+  const diffMinutes = Math.floor(diffTime / (1000 * 60));
+  const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  let updatedAt = '';
+
+  if (diffMinutes < 1) {
+    updatedAt = 'just now';
+  } else if (diffHours < 24) {
+    updatedAt = diffHours === 1 ? '1 hour ago' : `${diffHours} hours ago`;
+  } else if (diffDays === 1) {
+    updatedAt = 'yesterday';
+  } else if (diffDays < 7) {
+    updatedAt = `${diffDays} days ago`;
+  } else if (diffDays < 30) {
+    updatedAt = 'last week';
+  } else if (diffDays < 365) {
+    const months = Math.floor(diffDays / 30);
+    updatedAt = months === 1 ? '1 month ago' : `${months} months ago`;
+  } else {
+    const years = Math.floor(diffDays / 365);
+    updatedAt = years === 1 ? '1 year ago' : `${years} years ago`;
+  }
+
   return (
     <a
       href={repo.html_url}
@@ -44,7 +73,7 @@ export default function Repositories({ repo }: TRepoProps) {
               <span>{repo.license?.spdx_id || 'MIT'}</span>
             </article>
             <article>
-              <p className="text-[14px] text-nowrap">updated X days ago</p>
+              <p className="text-[14px] text-nowrap">updated {updatedAt}</p>
             </article>
           </div>
         </div>
