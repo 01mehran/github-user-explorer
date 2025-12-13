@@ -20,6 +20,7 @@ export interface TRepo {
     spdx_id: string | null;
   } | null;
   updated_at: string;
+  html_url: string;
 }
 
 export default function FetchUserProfile(initialUser: string) {
