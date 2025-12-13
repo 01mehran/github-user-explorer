@@ -21,6 +21,9 @@ export default function Repositories({ repo }: TRepoProps) {
 
   if (diffMinutes < 1) {
     updatedAt = 'just now';
+  } else if (diffMinutes < 60) {
+    updatedAt =
+      diffMinutes === 1 ? '1 minute ago' : `${diffMinutes} minutes ago`;
   } else if (diffHours < 24) {
     updatedAt = diffHours === 1 ? '1 hour ago' : `${diffHours} hours ago`;
   } else if (diffDays === 1) {
