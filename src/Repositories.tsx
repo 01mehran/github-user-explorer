@@ -31,13 +31,18 @@ export default function Repositories({ repo }: TRepoProps) {
   } else if (diffDays < 7) {
     updatedAt = `${diffDays} days ago`;
   } else if (diffDays < 30) {
-    updatedAt = 'last week';
+    const weeks = Math.floor(diffDays / 7);
+    if (weeks === 1) {
+      updatedAt = 'last week';
+    } else {
+      updatedAt = `${weeks} weeks ago`;
+    }
   } else if (diffDays < 365) {
     const months = Math.floor(diffDays / 30);
-    updatedAt = months === 1 ? '1 month ago' : `${months} months ago`;
+    updatedAt = months === 1 ? 'last month' : `${months} months ago`;
   } else {
     const years = Math.floor(diffDays / 365);
-    updatedAt = years === 1 ? '1 year ago' : `${years} years ago`;
+    updatedAt = years === 1 ? 'last' : `${years} years ago`;
   }
 
   return (
