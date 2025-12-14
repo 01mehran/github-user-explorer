@@ -103,11 +103,16 @@ export default function Home() {
           </main>
 
           {/* Footer */}
-          <footer className="mt-6 text-center md:mt-8">
-            <button className="cursor-pointer font-medium">
-              View all repositories
-            </button>
-          </footer>
+          {userRepos?.length > 4 && (
+            <footer className="py-4 text-center">
+              <button
+                className="cursor-pointer font-medium"
+                onClick={() => setShowAll((prev) => !prev)}
+              >
+                {showAll ? 'View less repositories' : 'View all repositories'}
+              </button>
+            </footer>
+          )}
         </>
       )}
     </div>
