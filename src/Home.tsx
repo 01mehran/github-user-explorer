@@ -15,6 +15,10 @@ export default function Home() {
   const { data, getUser, isLoading, userRepos, error } =
     FetchUserProfile(input);
 
+  const [showAll, setShowAll] = useState(false);
+
+  const visiblrRepos = showAll ? userRepos : userRepos?.slice(0, 4);
+
   useEffect(() => {
     getUser('01mehran');
   }, []);
@@ -48,7 +52,7 @@ export default function Home() {
       ) : (
         <>
           {/* Main content */}
-          <main className="pb-4">
+          <main>
             {/* Followers & location section  */}
             <section className="items-start space-y-4 px-4 sm:flex sm:max-w-5xl sm:gap-6 md:mx-auto md:gap-12">
               {/* Github icon */}
@@ -91,7 +95,7 @@ export default function Home() {
 
               <div className="mt-6 grid items-start space-y-6 sm:gap-4 sm:space-y-2 md:grid-cols-2">
                 {/* Repositories */}
-                {userRepos?.map((repo) => (
+                {visiblrRepos?.map((repo) => (
                   <Repositories key={repo.id} repo={repo} />
                 ))}
               </div>
