@@ -9,6 +9,7 @@ import FetchUserProfile from './services/FetchUserProfile';
 import Repositories from './Repositories';
 import HeroSection from './HeroSection';
 import Spinner from './Spinner';
+import Footer from './Footer';
 
 export default function Home() {
   const [input, setInput] = useState<string>('');
@@ -102,14 +103,7 @@ export default function Home() {
 
           {/* Footer */}
           {userRepos && userRepos?.length > 4 && (
-            <footer className="py-4 text-center">
-              <button
-                className="cursor-pointer font-medium"
-                onClick={() => setShowAll((prev) => !prev)}
-              >
-                {showAll ? 'View less repositories' : 'View all repositories'}
-              </button>
-            </footer>
+            <Footer showAll={showAll} setShowAll={setShowAll} />
           )}
         </>
       )}
