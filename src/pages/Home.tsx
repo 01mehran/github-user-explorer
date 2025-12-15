@@ -4,12 +4,14 @@
 import { useEffect, useState } from 'react';
 
 // Services;
-import FetchUserProfile from './services/FetchUserProfile';
-import Repositories from './Repositories';
-import HeroSection from './HeroSection';
-import Spinner from './Spinner';
-import Footer from './Footer';
-import Header from './Header';
+import FetchUserProfile from '../services/FetchUserProfile';
+
+// Components;
+import Repositories from '../components/Repositories';
+import HeroSection from '../components/HeroSection';
+import Spinner from '../components/Spinner';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 export default function Home() {
   const [input, setInput] = useState<string>('');

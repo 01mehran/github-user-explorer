@@ -1,8 +1,8 @@
 // Type;
-import type { IUser } from './services/FetchUserProfile';
+import type { IUser } from '../services/FetchUserProfile';
 
 // Images;
-import githubImg from './assets/githubimg.png';
+import githubImg from '../assets/githubimg.png';
 
 interface IHeaderProps {
   userInfo: IUser;

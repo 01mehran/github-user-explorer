@@ -1,5 +1,5 @@
 // Icons;
-import searchIcon from './assets/Search.svg';
+import searchIcon from '../assets/Search.svg';
 
 interface IHeroSectionProps {
   onHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

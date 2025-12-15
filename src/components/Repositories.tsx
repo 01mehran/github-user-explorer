@@ -1,7 +1,7 @@
-import nesting from './assets/Nesting.svg';
-import star from './assets/Star.svg';
-import chield from './assets/Chield_alt.svg';
-import type { IRepos } from './services/FetchUserProfile';
+import nesting from '../assets/Nesting.svg';
+import star from '../assets/Star.svg';
+import chield from '../assets/Chield_alt.svg';
+import type { IRepos } from '../services/FetchUserProfile';
 
 interface TRepoProps {
   repo: IRepos;
@@ -42,7 +42,7 @@ export default function Repositories({ repo }: TRepoProps) {
     updatedAt = months === 1 ? 'last month' : `${months} months ago`;
   } else {
     const years = Math.floor(diffDays / 365);
-    updatedAt = years === 1 ? 'last' : `${years} years ago`;
+    updatedAt = years === 1 ? 'last year' : `${years} years ago`;
   }
 
   return (
