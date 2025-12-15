@@ -52,7 +52,6 @@ export default function FetchUserProfile(initialUser?: string) {
         `https://api.github.com/users/${user}/repos`,
       );
 
-      console.log(resRepos);
       if (resRepos.status !== 200) {
         throw new Error('Repositories not found');
       }

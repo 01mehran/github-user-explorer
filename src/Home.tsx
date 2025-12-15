@@ -1,5 +1,4 @@
 // icons;
-import githubImg from './assets/githubimg.png';
 
 // Hooks
 import { useEffect, useState } from 'react';
@@ -10,6 +9,7 @@ import Repositories from './Repositories';
 import HeroSection from './HeroSection';
 import Spinner from './Spinner';
 import Footer from './Footer';
+import Header from './Header';
 
 export default function Home() {
   const [input, setInput] = useState<string>('');
@@ -55,37 +55,7 @@ export default function Home() {
             {/* Followers & location section  */}
             <section className="items-start space-y-4 px-4 sm:flex sm:max-w-5xl sm:gap-6 md:mx-auto md:gap-12">
               {/* Github icon */}
-              <article className="border-background h-22 w-22 -translate-y-8 transform rounded-xl border-6 md:h-24 md:w-24">
-                <img
-                  src={userInfo?.avatar_url || githubImg}
-                  alt="github img"
-                  className="h-full w-full rounded-xl object-cover"
-                />
-              </article>
-
-              {/* Followers  */}
-              <div className="-translate-y-7 transform flex-wrap items-start space-y-3 sm:mt-2 sm:flex sm:translate-y-0 sm:space-x-4 md:mt-3 md:space-x-8">
-                <div className="box">
-                  <span className="box-child">Followers</span>
-                  <span className="pl-3 text-center">
-                    {userInfo?.followers || 0}
-                  </span>
-                </div>
-                {/* Following */}
-                <div className="box">
-                  <span className="box-child">Following</span>
-                  <span className="pl-3 text-center">
-                    {userInfo?.following || 0}
-                  </span>
-                </div>
-                {/* Location */}
-                <div className="box">
-                  <span className="box-child">Location</span>
-                  <span className="pl-3 text-center">
-                    {userInfo?.location || 'no location'}
-                  </span>
-                </div>
-              </div>
+              {userInfo && <Header userInfo={userInfo} />}
             </section>
 
             <section className="mx-auto px-4 sm:max-w-5xl">
