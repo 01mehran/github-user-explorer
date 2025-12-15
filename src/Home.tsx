@@ -11,13 +11,11 @@ import HeroSection from './HeroSection';
 import Spinner from './Spinner';
 
 export default function Home() {
-  const [input, setInput] = useState('');
-  const { data, getUser, isLoading, userRepos, error } =
+  const [input, setInput] = useState<string>('');
+  const { userInfo, getUser, isLoading, userRepos, error } =
     FetchUserProfile(input);
-
   const [showAll, setShowAll] = useState(false);
-
-  const visiblrRepos = showAll ? userRepos : userRepos?.slice(0, 4);
+  const visibleRepos = showAll ? userRepos : (userRepos?.slice(0, 4) ?? []);
 
   useEffect(() => {
     getUser('01mehran');
@@ -40,8 +38,8 @@ export default function Home() {
       {/* Hero section*/}
       <HeroSection
         onHandleChange={handleChange}
-        onHandleSubmit={handleSubmit}
         input={input}
+        onHandleSubmit={handleSubmit}
         isLoading={isLoading}
       />
 
@@ -58,7 +56,7 @@ export default function Home() {
               {/* Github icon */}
               <article className="border-background h-22 w-22 -translate-y-8 transform rounded-xl border-6 md:h-24 md:w-24">
                 <img
-                  src={data?.avatar_url || githubImg}
+                  src={userInfo?.avatar_url || githubImg}
                   alt="github img"
                   className="h-full w-full rounded-xl object-cover"
                 />
@@ -69,33 +67,33 @@ export default function Home() {
                 <div className="box">
                   <span className="box-child">Followers</span>
                   <span className="pl-3 text-center">
-                    {data?.followers || 0}
+                    {userInfo?.followers || 0}
                   </span>
                 </div>
                 {/* Following */}
                 <div className="box">
                   <span className="box-child">Following</span>
                   <span className="pl-3 text-center">
-                    {data?.following || 0}
+                    {userInfo?.following || 0}
                   </span>
                 </div>
                 {/* Location */}
                 <div className="box">
                   <span className="box-child">Location</span>
                   <span className="pl-3 text-center">
-                    {data?.location || 'Iran'}
+                    {userInfo?.location || 'no location'}
                   </span>
                 </div>
               </div>
             </section>
 
             <section className="mx-auto px-4 sm:max-w-5xl">
-              <h3 className="text-4xl font-medium">{data?.login}</h3>
-              <p>{data?.bio || 'No bio set'}</p>
+              <h3 className="text-4xl font-medium">{userInfo?.login}</h3>
+              <p className="italic">{userInfo?.bio || 'no bio set'}</p>
 
               <div className="mt-6 grid items-start space-y-6 sm:gap-4 sm:space-y-2 md:grid-cols-2">
                 {/* Repositories */}
-                {visiblrRepos?.map((repo) => (
+                {visibleRepos?.map((repo) => (
                   <Repositories key={repo.id} repo={repo} />
                 ))}
               </div>
@@ -103,7 +101,7 @@ export default function Home() {
           </main>
 
           {/* Footer */}
-          {userRepos?.length > 4 && (
+          {userRepos && userRepos?.length > 4 && (
             <footer className="py-4 text-center">
               <button
                 className="cursor-pointer font-medium"

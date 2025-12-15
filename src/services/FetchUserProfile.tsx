@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-interface TData {
+export interface IUser {
   avatar_url: string;
   followers: number;
   following: number;
@@ -10,7 +10,7 @@ interface TData {
   login: string;
 }
 
-export interface TRepo {
+export interface IRepos {
   id: number;
   name: string;
   description: string | null;
@@ -23,9 +23,9 @@ export interface TRepo {
   html_url: string;
 }
 
-export default function FetchUserProfile(initialUser: string) {
-  const [data, setData] = useState<TData | null>(null);
-  const [userRepos, setUserRepos] = useState<TRepo[]>([]);
+export default function FetchUserProfile(initialUser?: string) {
+  const [userInfo, setUserInfo] = useState<IUser | null>(null);
+  const [userRepos, setUserRepos] = useState<IRepos[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -37,7 +37,7 @@ export default function FetchUserProfile(initialUser: string) {
 
     try {
       // Fetch user;
-      const resUser = await axios<TData>(
+      const resUser = await axios<IUser>(
         `https://api.github.com/users/${user}`,
       );
 
@@ -45,13 +45,14 @@ export default function FetchUserProfile(initialUser: string) {
         throw new Error('User not found');
       }
 
-      setData(resUser.data);
+      setUserInfo(resUser.data);
 
       // Fetch repos;
-      const resRepos = await axios<TRepo[]>(
+      const resRepos = await axios<IRepos[]>(
         `https://api.github.com/users/${user}/repos`,
       );
 
+      console.log(resRepos);
       if (resRepos.status !== 200) {
         throw new Error('Repositories not found');
       }
@@ -74,5 +75,5 @@ export default function FetchUserProfile(initialUser: string) {
     }
   };
 
-  return { data, getUser, isLoading, userRepos, error };
+  return { userInfo, getUser, isLoading, userRepos, error };
 }

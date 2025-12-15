@@ -1,10 +1,10 @@
 import nesting from './assets/Nesting.svg';
 import star from './assets/Star.svg';
 import chield from './assets/Chield_alt.svg';
-import type { TRepo } from './services/FetchUserProfile';
+import type { IRepos } from './services/FetchUserProfile';
 
 interface TRepoProps {
-  repo: TRepo;
+  repo: IRepos;
 }
 
 export default function Repositories({ repo }: TRepoProps) {
@@ -67,7 +67,7 @@ export default function Repositories({ repo }: TRepoProps) {
         </div>
 
         <div>
-          <div className="flex items-center gap-2 md:gap-6">
+          <div className="flex items-center gap-2 sm:gap-5">
             <article className="flex gap-1 text-sm">
               <img src={nesting} alt="nesting icon" className="w-5" />
               <span>{repo.forks_count}</span>
@@ -78,7 +78,9 @@ export default function Repositories({ repo }: TRepoProps) {
             </article>
             <article className="flex gap-1 text-sm">
               <img src={chield} alt="nesting icon" className="w-5" />
-              <span>{repo.license?.spdx_id || 'MIT'}</span>
+              <span className="text-nowrap">
+                {repo.license?.spdx_id || 'MIT'}
+              </span>
             </article>
             <article>
               <p className="text-[14px] text-nowrap">updated {updatedAt}</p>

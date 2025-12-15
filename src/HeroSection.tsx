@@ -1,18 +1,18 @@
 // Icons;
 import searchIcon from './assets/Search.svg';
 
-interface THeroSectionProps {
-  onHandleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+interface IHeroSectionProps {
   onHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onHandleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   input: string;
   isLoading: boolean;
 }
 
 export default function HeroSection({
-  onHandleSubmit,
-  input,
   onHandleChange,
-}: THeroSectionProps) {
+  input,
+  onHandleSubmit,
+}: IHeroSectionProps) {
   return (
     <header className="h-48 w-full bg-black bg-[url(./assets/mobile-hero-img.jpg)] bg-cover bg-center bg-no-repeat px-4 py-3 sm:h-54 sm:bg-[url(./assets/desktop-hero-img.jpg)]">
       {/* Search input */}
