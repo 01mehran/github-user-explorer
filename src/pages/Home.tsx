@@ -17,6 +17,7 @@ export default function Home() {
     FetchUserProfile(input);
   const [showAll, setShowAll] = useState(false);
   const visibleRepos = showAll ? userRepos : (userRepos?.slice(0, 4) ?? []);
+  const totalRepository = userRepos?.length;
 
   useEffect(() => {
     getUser('01mehran');
@@ -59,10 +60,15 @@ export default function Home() {
             </section>
 
             <section className="mx-auto px-4 sm:max-w-5xl">
-              <h3 className="text-4xl font-medium">{userInfo?.login}</h3>
-              <p className="italic">{userInfo?.bio || 'no bio set'}</p>
+              <article className="pb-8">
+                <h3 className="text-4xl font-medium">{userInfo?.login}</h3>
+                <p className="italic">{userInfo?.bio || 'no bio set'}</p>
+              </article>
 
-              <div className="mt-6 grid items-start space-y-6 sm:gap-4 sm:space-y-2 md:grid-cols-2">
+              <p className="text-[12px] font-medium tracking-wider">
+                Total Repository : {totalRepository}
+              </p>
+              <div className="mt-2 grid items-start space-y-6 sm:gap-4 sm:space-y-2 md:grid-cols-2">
                 {/* Repositories */}
                 {visibleRepos?.map((repo) => (
                   <Repositories key={repo.id} repo={repo} />
