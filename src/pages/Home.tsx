@@ -42,7 +42,6 @@ export default function Home() {
         onHandleChange={handleChange}
         input={input}
         onHandleSubmit={handleSubmit}
-        isLoading={isLoading}
       />
 
       {isLoading ? (

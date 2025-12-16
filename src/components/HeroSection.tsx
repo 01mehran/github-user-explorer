@@ -5,7 +5,6 @@ interface IHeroSectionProps {
   onHandleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onHandleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   input: string;
-  isLoading: boolean;
 }
 
 export default function HeroSection({

@@ -2,7 +2,7 @@ import nesting from '../assets/Nesting.svg';
 import star from '../assets/Star.svg';
 import chield from '../assets/Chield_alt.svg';
 import type { IRepos } from '../services/FetchUserProfile';
-import UpdatedAtTime from '../pages/UpdatedAtTime';
+import UpdatedAtTime from '../utils/UpdatedAtTime';
 
 interface TRepoProps {
   repo: IRepos;
