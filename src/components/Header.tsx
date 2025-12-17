@@ -4,14 +4,32 @@ import type { IUser } from '../services/FetchUserProfile';
 // Images;
 import githubImg from '../assets/githubimg.png';
 
+import { useState } from 'react';
+import AvatarModal from './AvatarModal';
+
 interface IHeaderProps {
   userInfo: IUser;
 }
 
 export default function Header({ userInfo }: IHeaderProps) {
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
+
+  const toggleModalAvatar = () => {
+    setIsAvatarModalOpen((prev) => !prev);
+  };
+
   return (
     <>
-      <article className="border-background h-22 w-22 -translate-y-8 transform rounded-xl border-6 md:h-24 md:w-24">
+      <AvatarModal
+        onToggleModalAvatar={toggleModalAvatar}
+        isAvatarModalOpen={isAvatarModalOpen}
+        avatar={userInfo?.avatar_url}
+      />
+
+      <article
+        className="border-background h-22 w-22 -translate-y-8 transform cursor-pointer rounded-xl border-6 md:h-24 md:w-24"
+        onClick={toggleModalAvatar}
+      >
         <img
           src={userInfo?.avatar_url || githubImg}
           alt="github img"

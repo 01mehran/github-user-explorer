@@ -36,7 +36,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen antialiased">
+    <div className="relative h-screen antialiased">
       {/* Hero section*/}
       <HeroSection
         onHandleChange={handleChange}
