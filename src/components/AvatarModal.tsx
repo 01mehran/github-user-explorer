@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 interface IUserProf {
   onToggleModalAvatar: () => void;
   isAvatarModalOpen: boolean;
@@ -9,6 +10,21 @@ export default function AvatarModal({
   isAvatarModalOpen,
   avatar,
 }: IUserProf) {
+  // Close avatar modal with Esc button;
+  useEffect(() => {
+    if (!isAvatarModalOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onToggleModalAvatar();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isAvatarModalOpen, onToggleModalAvatar]);
+
   return (
     <>
       <div
