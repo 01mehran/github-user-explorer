@@ -22,7 +22,7 @@ export default function HeroSection({
         <input
           type="text"
           placeholder="Enter a github username"
-          className="bg-background mx-auto h-full w-full rounded-lg border-0 px-12 text-white outline-0"
+          className="bg-background ring-text mx-auto h-full w-full rounded-lg border-0 px-12 text-white outline-0 transition-all duration-200 focus:ring"
           value={input}
           onChange={onHandleChange}
         />

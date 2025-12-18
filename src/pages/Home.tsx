@@ -10,6 +10,7 @@ import HeroSection from '../components/HeroSection';
 import Spinner from '../components/Spinner';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import BackToTopButtun from '../components/BackToTopButtun';
 
 export default function Home() {
   const [input, setInput] = useState<string>('');
@@ -80,6 +81,8 @@ export default function Home() {
           {userRepos && userRepos?.length > 4 && (
             <Footer showAll={showAll} setShowAll={setShowAll} />
           )}
+
+          <BackToTopButtun />
         </>
       )}
     </div>

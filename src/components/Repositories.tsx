@@ -1,9 +1,14 @@
+// Images;
 import nesting from '../assets/Nesting.svg';
 import star from '../assets/Star.svg';
 import chield from '../assets/Chield_alt.svg';
-import type { IRepos } from '../services/FetchUserProfile';
-import UpdatedAtTime from '../utils/UpdatedAtTime';
 
+// Services;
+import type { IRepos } from '../services/FetchUserProfile';
+
+// Utils;
+import UpdatedAtTime from '../utils/UpdatedAtTime';
+// Types;
 interface TRepoProps {
   repo: IRepos;
 }
@@ -20,11 +25,11 @@ export default function Repositories({ repo }: TRepoProps) {
     >
       <div className="flex h-40 transform cursor-pointer flex-col justify-between rounded-lg bg-linear-to-br from-[#13182e] via-[#17183a] to-[#1b1a44] p-4">
         <div className="flex h-22 flex-col gap-1 overflow-auto">
-          <p className="text-text tracking-wide">
+          <p className="tracking-wide">
             Repository name:{' '}
             <span className="text-text/85 italic">{repo.name}</span>
           </p>
-          <p className="text-text tracking-wide">
+          <p className="tracking-wide">
             Repository description:{' '}
             <span className="text-text/85 italic">
               {repo.description || 'no description'}
