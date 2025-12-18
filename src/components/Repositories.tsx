@@ -21,7 +21,7 @@ export default function Repositories({ repo }: TRepoProps) {
       href={repo.html_url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block rounded-lg border border-slate-700 transition-all hover:scale-95"
+      className="block rounded-lg border border-slate-700 shadow-lg transition-all hover:scale-95"
     >
       <div className="flex h-40 transform cursor-pointer flex-col justify-between rounded-lg bg-linear-to-br from-[#13182e] via-[#17183a] to-[#1b1a44] p-4">
         <div className="flex h-22 flex-col gap-1 overflow-auto">
