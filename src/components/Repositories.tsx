@@ -7,14 +7,15 @@ import chield from '../assets/Chield_alt.svg';
 import type { IRepos } from '../services/FetchUserProfile';
 
 // Utils;
-import UpdatedAtTime from '../utils/UpdatedAtTime';
+import { getUpdatedAtTime } from '../utils/getUpdatedAtTime';
+
 // Types;
 interface TRepoProps {
   repo: IRepos;
 }
 
 export default function Repositories({ repo }: TRepoProps) {
-  const { updatedAt } = UpdatedAtTime(repo.updated_at);
+  const updatedAt = getUpdatedAtTime(repo.updated_at);
 
   return (
     <a
