@@ -7,11 +7,14 @@ export default function BackToTopButtun() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      currentScrollY > 300 ? setShowButton(true) : setShowButton(false);
+      setShowButton(currentScrollY > 300);
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const moveToTop = () => {

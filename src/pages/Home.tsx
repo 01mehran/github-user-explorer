@@ -62,7 +62,7 @@ export default function Home() {
             <section className="mx-auto px-4 sm:max-w-5xl">
               <article className="pb-8">
                 <h3 className="text-4xl font-medium">{userInfo?.login}</h3>
-                <p className="italic">{userInfo?.bio || 'no bio set'}</p>
+                <p className="italic">{userInfo?.bio || 'No bio yet'}</p>
               </article>
 
               <p className="text-[12px] font-medium tracking-wider">

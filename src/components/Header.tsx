@@ -51,7 +51,7 @@ export default function Header({ userInfo }: IHeaderProps) {
         {/* Location */}
         <div className="box">
           <span className="box-child">Location</span>
-          <span className="pl-3 text-center">
+          <span className="pl-3 text-center capitalize">
             {userInfo?.location || 'no location'}
           </span>
         </div>
